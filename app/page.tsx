@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import Disclaimer from "@/components/Disclaimer";
 import Wizard from "@/components/Wizard";
 import ResultView from "@/components/ResultView";
+import FloorEditor from "@/components/FloorEditor";
 import { autoLayout } from "@/lib/autoLayout";
 import { save, load } from "@/lib/storage";
 import type { Answers, ZoneBox } from "@/lib/types";
@@ -63,8 +64,13 @@ export default function Home() {
           <button className="secondary" onClick={() => setView("wizard")}>แก้คำตอบ</button>
         </>
       )}
-      {view === "editor" && (
-        <p>editor (อยู่ระหว่างพัฒนา)</p>
+      {view === "editor" && answers && (
+        <FloorEditor
+          answers={answers}
+          layout={layout}
+          onChange={setLayout}
+          onBack={() => setView("result")}
+        />
       )}
     </main>
   );
