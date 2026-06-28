@@ -1,17 +1,7 @@
 import { ZONES } from "@/lib/gpp";
 import { autoLayout } from "@/lib/autoLayout";
-import type { ZoneId } from "@/lib/types";
+import { ZONE_COLORS } from "@/lib/zoneStyle";
 import LayoutSvg from "./LayoutSvg";
-
-const SWATCH: Record<ZoneId, string> = {
-  dispensing: "#BFE3E8",
-  counseling: "#CDE7D5",
-  dangerous:  "#F3D2CE",
-  otc:        "#E7EDF0",
-  fridge:     "#CFE0F2",
-  storage:    "#EDE6D6",
-  waiting:    "#E6E0EC",
-};
 
 const REF_W = 3;
 const REF_D = 4;
@@ -71,7 +61,7 @@ export default function ReferenceLayout() {
                 width: 14,
                 height: 14,
                 borderRadius: 3,
-                background: SWATCH[z.id],
+                background: ZONE_COLORS[z.id],
                 border: "1px solid #7A9BA4",
                 flexShrink: 0,
                 marginTop: 1,

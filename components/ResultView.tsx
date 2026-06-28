@@ -14,11 +14,6 @@ const SECTION_STYLE: React.CSSProperties = {
   border: "1px solid #E4EDF1",
 };
 
-const DIVIDER: React.CSSProperties = {
-  height: 1,
-  background: "#E4EDF1",
-  margin: "20px 0",
-};
 
 export default function ResultView({
   answers,
@@ -54,7 +49,7 @@ export default function ResultView({
       </div>
 
       {/* Page header + print action */}
-      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
+      <div className="no-print" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
         <p style={{ margin: 0, fontSize: 13, color: "#6B7C84" }}>
           ร้านขนาด {answers.widthM}×{answers.depthM} ม. · พื้นที่ {area} ตร.ม. ·{" "}
           ทางเข้า{doorLabel}

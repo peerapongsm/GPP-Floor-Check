@@ -1,33 +1,12 @@
 "use client";
 import { useRef, useState } from "react";
 import { ZONES } from "@/lib/gpp";
+import { ZONE_COLORS, ZONE_SHORT_LABEL } from "@/lib/zoneStyle";
 import { checkLayout } from "@/lib/checkLayout";
 import type { Answers, Boundary, ZoneBox, ZoneId } from "@/lib/types";
 
 // 40 SVG units per meter — same as LayoutSvg.tsx
 const PX = 40;
-
-// Zone colours — mirrors LayoutSvg.tsx
-const COLORS: Record<ZoneId, string> = {
-  dispensing: "#BFE3E8",
-  counseling: "#CDE7D5",
-  dangerous:  "#F3D2CE",
-  otc:        "#E7EDF0",
-  fridge:     "#CFE0F2",
-  storage:    "#EDE6D6",
-  waiting:    "#E6E0EC",
-};
-
-// Short zone labels for SVG boxes — mirrors LayoutSvg.tsx
-const SVG_LABEL: Record<ZoneId, string[]> = {
-  dispensing: ["ส่งมอบยา"],
-  counseling: ["ให้คำ", "ปรึกษา"],
-  dangerous:  ["ยาอันตราย"],
-  otc:        ["ยา OTC"],
-  fridge:     ["ตู้เย็นยา"],
-  storage:    ["คลัง"],
-  waiting:    ["รอรับ", "บริการ"],
-};
 
 // ─── Drag state (lives in a ref to avoid re-render on every move) ──────────────
 interface DragState {
@@ -324,7 +303,7 @@ export default function FloorEditor({
             const rh = b.h * PX;
             const cx = rx + rw / 2;
             const cy = ry + rh / 2;
-            const lines = SVG_LABEL[b.zone];
+            const lines = ZONE_SHORT_LABEL[b.zone];
             const fontSize = rw < 55 ? 7.5 : 9;
             const lineH = fontSize + 2;
             const totalH = lines.length * lineH;
@@ -338,7 +317,7 @@ export default function FloorEditor({
                   y={ry}
                   width={rw}
                   height={rh}
-                  fill={COLORS[b.zone]}
+                  fill={ZONE_COLORS[b.zone]}
                   stroke="#7A9BA4"
                   strokeWidth={1}
                   rx={3}
@@ -406,12 +385,12 @@ export default function FloorEditor({
                   width: 10,
                   height: 10,
                   borderRadius: 2,
-                  background: COLORS[z.id],
+                  background: ZONE_COLORS[z.id],
                   border: "1px solid #7A9BA4",
                   flexShrink: 0,
                 }}
               />
-              {SVG_LABEL[z.id][0]}
+              {ZONE_SHORT_LABEL[z.id][0]}
             </div>
           ))}
         </div>
@@ -447,7 +426,7 @@ export default function FloorEditor({
                 style={{ fontSize: 12, padding: "6px 12px" }}
                 onClick={() => addZone(z.id)}
               >
-                + {SVG_LABEL[z.id][0]}
+                + {ZONE_SHORT_LABEL[z.id][0]}
               </button>
             ))}
           </div>

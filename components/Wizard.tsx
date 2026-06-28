@@ -469,12 +469,12 @@ function ChecklistStep({
 }
 
 // ── Main Wizard export ────────────────────────────────────────────────────────
-export default function Wizard({ onComplete }: { onComplete: (a: Answers) => void }) {
+export default function Wizard({ onComplete, initial }: { onComplete: (a: Answers) => void; initial?: Answers }) {
   const [step, setStep] = useState(1);
-  const [widthM, setWidth] = useState(5);
-  const [depthM, setDepth] = useState(8);
-  const [doorSide, setDoor] = useState<DoorSide>("bottom");
-  const [checklist, setChecklist] = useState<Record<string, boolean>>({});
+  const [widthM, setWidth] = useState(initial?.widthM ?? 5);
+  const [depthM, setDepth] = useState(initial?.depthM ?? 8);
+  const [doorSide, setDoor] = useState<DoorSide>(initial?.doorSide ?? "bottom");
+  const [checklist, setChecklist] = useState<Record<string, boolean>>(initial?.checklist ?? {});
 
   const setCheck = (id: string, v: boolean) =>
     setChecklist(c => ({ ...c, [id]: v }));

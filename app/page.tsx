@@ -14,6 +14,7 @@ export default function Home() {
   const [view, setView] = useState<View>("landing");
   const [answers, setAnswers] = useState<Answers | null>(null);
   const [layout, setLayout] = useState<ZoneBox[]>([]);
+  const [wizardSeed, setWizardSeed] = useState<Answers | undefined>(undefined);
 
   // Restore saved state on mount
   useEffect(() => {
@@ -43,14 +44,20 @@ export default function Home() {
           <p>
             ตอบคำถามไม่กี่ข้อ แล้วรับรายงานความพร้อม + ผังโซนที่แนะนำสำหรับร้านของคุณ
           </p>
-          <button onClick={() => setView("wizard")}>
-            {answers ? "ทำต่อจากเดิม / ประเมินใหม่" : "เริ่มประเมิน"}
-          </button>
+          {answers ? (
+            <div style={{ display: "flex", gap: 10, flexWrap: "wrap" }}>
+              <button onClick={() => setView("result")}>ดูผลล่าสุด</button>
+              <button className="secondary" onClick={() => { setWizardSeed(undefined); setView("wizard"); }}>ประเมินใหม่</button>
+            </div>
+          ) : (
+            <button onClick={() => { setWizardSeed(undefined); setView("wizard"); }}>เริ่มประเมิน</button>
+          )}
           <Disclaimer />
         </section>
       )}
       {view === "wizard" && (
         <Wizard
+          initial={wizardSeed}
           onComplete={a => {
             setAnswers(a);
             setLayout(autoLayout(a.widthM, a.depthM, a.doorSide));
@@ -61,7 +68,7 @@ export default function Home() {
       {view === "result" && answers && (
         <>
           <ResultView answers={answers} layout={layout} onEdit={() => setView("editor")} />
-          <button className="secondary" onClick={() => setView("wizard")}>แก้คำตอบ</button>
+          <button className="secondary" onClick={() => { setWizardSeed(answers); setView("wizard"); }}>แก้คำตอบ</button>
         </>
       )}
       {view === "editor" && answers && (

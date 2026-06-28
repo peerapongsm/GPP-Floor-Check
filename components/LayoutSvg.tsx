@@ -1,28 +1,8 @@
 import { ZONES } from "@/lib/gpp";
+import { ZONE_COLORS, ZONE_SHORT_LABEL } from "@/lib/zoneStyle";
 import type { ZoneBox, ZoneId } from "@/lib/types";
 
 const PX = 40;
-
-const COLORS: Record<ZoneId, string> = {
-  dispensing: "#BFE3E8",
-  counseling: "#CDE7D5",
-  dangerous:  "#F3D2CE",
-  otc:        "#E7EDF0",
-  fridge:     "#CFE0F2",
-  storage:    "#EDE6D6",
-  waiting:    "#E6E0EC",
-};
-
-// Short display labels for SVG boxes (full labels are in ZONES and used in <title>)
-const SVG_LABEL: Record<ZoneId, string[]> = {
-  dispensing: ["ส่งมอบยา"],
-  counseling: ["ให้คำ", "ปรึกษา"],
-  dangerous:  ["ยาอันตราย"],
-  otc:        ["ยา OTC"],
-  fridge:     ["ตู้เย็นยา"],
-  storage:    ["คลัง"],
-  waiting:    ["รอรับ", "บริการ"],
-};
 
 const labelOf = (id: ZoneId) => ZONES.find(z => z.id === id)!.label;
 
@@ -59,7 +39,7 @@ export default function LayoutSvg({
         const rh = b.h * PX;
         const cx = rx + rw / 2;
         const cy = ry + rh / 2;
-        const lines = SVG_LABEL[b.zone];
+        const lines = ZONE_SHORT_LABEL[b.zone];
         const fontSize = rw < 55 ? 7.5 : 9;
         const lineH = fontSize + 2;
         const totalH = lines.length * lineH;
@@ -73,7 +53,7 @@ export default function LayoutSvg({
               y={ry}
               width={rw}
               height={rh}
-              fill={COLORS[b.zone]}
+              fill={ZONE_COLORS[b.zone]}
               stroke="#7A9BA4"
               strokeWidth={0.75}
             />
