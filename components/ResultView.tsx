@@ -31,19 +31,40 @@ export default function ResultView({
 }) {
   const items = gapReport(answers, layout);
   const area = (answers.widthM * answers.depthM).toFixed(1);
+  const doorLabel =
+    answers.doorSide === "bottom" ? "ด้านหน้า" :
+    answers.doorSide === "top"    ? "ด้านหลัง" :
+    answers.doorSide === "left"   ? "ด้านซ้าย" :
+    "ด้านขวา";
 
   return (
     <section>
-      {/* Page header */}
-      <div style={{ marginBottom: 16 }}>
+      {/* Print-only document header */}
+      <div className="print-header">
+        <h2>รายงานความพร้อม GPP (ร้านยา)</h2>
+        <p>
+          ขนาดร้าน {answers.widthM}×{answers.depthM} ม. · พื้นที่ {area} ตร.ม. ·{" "}
+          ทางเข้า{doorLabel} · วันที่พิมพ์{" "}
+          {new Date().toLocaleDateString("th-TH", {
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+          })}
+        </p>
+      </div>
+
+      {/* Page header + print action */}
+      <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: 16 }}>
         <p style={{ margin: 0, fontSize: 13, color: "#6B7C84" }}>
           ร้านขนาด {answers.widthM}×{answers.depthM} ม. · พื้นที่ {area} ตร.ม. ·{" "}
-          ทางเข้า
-          {answers.doorSide === "bottom" && "ด้านหน้า"}
-          {answers.doorSide === "top"    && "ด้านหลัง"}
-          {answers.doorSide === "left"   && "ด้านซ้าย"}
-          {answers.doorSide === "right"  && "ด้านขวา"}
+          ทางเข้า{doorLabel}
         </p>
+        <button
+          onClick={() => window.print()}
+          style={{ flexShrink: 0, background: "#22343C", fontSize: 13, padding: "8px 18px", marginLeft: 12 }}
+        >
+          พิมพ์รายงาน / บันทึก PDF
+        </button>
       </div>
 
       {/* Gap report section */}
@@ -90,8 +111,8 @@ export default function ResultView({
         <button onClick={onEdit}>ปรับผังเอง →</button>
       </div>
 
-      {/* Reference layout section */}
-      <div style={SECTION_STYLE}>
+      {/* Reference layout section (screen only) */}
+      <div className="no-print" style={SECTION_STYLE}>
         <ReferenceLayout />
       </div>
 
