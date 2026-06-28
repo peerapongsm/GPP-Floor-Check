@@ -1,5 +1,5 @@
 import "./globals.css";
-export const metadata = { title: "GPP Fit-out Planner — วางผังร้านยาให้ผ่าน GPP", description: "ผู้ช่วยวางแผนร้านยาตามมาตรฐาน GPP" };
+export const metadata = { title: "GPP Floor Check — วางผังร้านยาให้ผ่าน GPP", description: "ผู้ช่วยวางแผนร้านยาตามมาตรฐาน GPP" };
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="th">
