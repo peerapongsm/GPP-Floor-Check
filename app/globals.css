@@ -1,0 +1,6 @@
+:root { --bg:#F7FAFC; --ink:#22343C; --primary:#2E7D8A; --pass:#2E9E6B; --warn:#C98A1B; --fail:#C2493E; }
+* { box-sizing: border-box; }
+html,body { margin:0; padding:0; background:var(--bg); color:var(--ink); font-family: system-ui, sans-serif; }
+button { font: inherit; cursor: pointer; border-radius: 10px; border: 1px solid transparent;
+  background: var(--primary); color: #fff; padding: 10px 16px; }
+button.secondary { background:#fff; color:var(--primary); border-color:var(--primary); }
