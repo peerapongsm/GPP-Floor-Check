@@ -31,15 +31,9 @@ export default function Home() {
   }, [answers, layout]);
 
   return (
-    <main
-      style={{
-        maxWidth: 720,
-        margin: "0 auto",
-        padding: view === "wizard" ? 0 : 20,
-      }}
-    >
+    <main className={`page page--${view}`}>
       {view === "landing" && (
-        <section>
+        <section className="landing">
           <h1>วางผังร้านยาให้ผ่าน GPP</h1>
           <p>
             ตอบคำถามไม่กี่ข้อ แล้วรับรายงานความพร้อม + ผังโซนที่แนะนำสำหรับร้านของคุณ

@@ -195,10 +195,10 @@ export default function FloorEditor({
         {/* SVG canvas */}
         <svg
           ref={svgRef}
+          className="editor-stage"
           viewBox={`0 0 ${vw} ${vh}`}
           width="100%"
           style={{
-            maxWidth: 480,
             border: "2px solid #C8D8DE",
             background: "#FAFCFD",
             display: "block",

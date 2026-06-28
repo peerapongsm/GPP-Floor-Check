@@ -62,53 +62,61 @@ export default function ResultView({
         </button>
       </div>
 
-      {/* Gap report section */}
-      <div style={SECTION_STYLE}>
-        <GapReportView items={items} />
-      </div>
-
-      {/* Suggested layout section */}
-      <div style={SECTION_STYLE}>
-        <div style={{ marginBottom: 12 }}>
-          <h3
-            style={{
-              margin: "0 0 2px",
-              fontSize: 16,
-              fontWeight: 700,
-              color: "var(--ink)",
-            }}
-          >
-            ผังที่แนะนำสำหรับร้านของคุณ
-          </h3>
-          <p style={{ margin: 0, fontSize: 13, color: "#6B7C84" }}>
-            {answers.widthM}×{answers.depthM} ม. ·{" "}
-            สร้างจากมาตรฐาน GPP โดยอัตโนมัติ
-          </p>
+      {/* Two-pane on desktop: gap report | floor plans */}
+      <div className="result-grid">
+        {/* Left: gap report */}
+        <div className="result-main">
+          <div style={SECTION_STYLE}>
+            <GapReportView items={items} />
+          </div>
         </div>
 
-        <LayoutSvg
-          boxes={layout}
-          widthM={answers.widthM}
-          depthM={answers.depthM}
-        />
+        {/* Right: suggested + reference layouts */}
+        <div className="result-side">
+          {/* Suggested layout section */}
+          <div style={SECTION_STYLE}>
+            <div style={{ marginBottom: 12 }}>
+              <h3
+                style={{
+                  margin: "0 0 2px",
+                  fontSize: 16,
+                  fontWeight: 700,
+                  color: "var(--ink)",
+                }}
+              >
+                ผังที่แนะนำสำหรับร้านของคุณ
+              </h3>
+              <p style={{ margin: 0, fontSize: 13, color: "#6B7C84" }}>
+                {answers.widthM}×{answers.depthM} ม. ·{" "}
+                สร้างจากมาตรฐาน GPP โดยอัตโนมัติ
+              </p>
+            </div>
 
-        <p
-          style={{
-            margin: "10px 0 16px",
-            fontSize: 12,
-            color: "#6B7C84",
-            lineHeight: 1.5,
-          }}
-        >
-          ผังนี้เป็นคำแนะนำเบื้องต้น — ปรับตามหน้างานจริง (เสา ท่อ หน้าต่าง สิ่งติดตั้งเดิม)
-        </p>
+            <LayoutSvg
+              boxes={layout}
+              widthM={answers.widthM}
+              depthM={answers.depthM}
+            />
 
-        <button onClick={onEdit}>ปรับผังเอง →</button>
-      </div>
+            <p
+              style={{
+                margin: "10px 0 16px",
+                fontSize: 12,
+                color: "#6B7C84",
+                lineHeight: 1.5,
+              }}
+            >
+              ผังนี้เป็นคำแนะนำเบื้องต้น — ปรับตามหน้างานจริง (เสา ท่อ หน้าต่าง สิ่งติดตั้งเดิม)
+            </p>
 
-      {/* Reference layout section (screen only) */}
-      <div className="no-print" style={SECTION_STYLE}>
-        <ReferenceLayout />
+            <button onClick={onEdit}>ปรับผังเอง →</button>
+          </div>
+
+          {/* Reference layout section (screen only) */}
+          <div className="no-print" style={SECTION_STYLE}>
+            <ReferenceLayout />
+          </div>
+        </div>
       </div>
 
       {/* Disclaimer */}
