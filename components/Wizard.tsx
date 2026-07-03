@@ -262,6 +262,44 @@ function StoreSchematic({
   );
 }
 
+// ── InfoRecap — compact dims/door summary beside the checklist on desktop ─────
+function InfoRecap({
+  widthM,
+  depthM,
+  doorSide,
+}: {
+  widthM: number;
+  depthM: number;
+  doorSide: DoorSide;
+}) {
+  const area = (widthM * depthM).toFixed(1);
+  const doorLabel = DOOR_OPTIONS.find(d => d.v === doorSide)?.label ?? "";
+  return (
+    <div className="wizard-info-recap">
+      <div
+        style={{
+          fontSize: 11,
+          color: "#6B7C84",
+          textTransform: "uppercase",
+          letterSpacing: "0.07em",
+          fontWeight: 600,
+          marginBottom: 4,
+          textAlign: "center",
+        }}
+      >
+        ข้อมูลร้าน
+      </div>
+      <StoreSchematic widthM={widthM} depthM={depthM} doorSide={doorSide} />
+      <div style={{ fontSize: 13, fontWeight: 600, color: "var(--ink)", textAlign: "center" }}>
+        พื้นที่ {area} ตร.ม.
+      </div>
+      <div style={{ fontSize: 12, color: "#6B7C84", textAlign: "center", marginTop: 3 }}>
+        ทางเข้า{doorLabel}
+      </div>
+    </div>
+  );
+}
+
 // ── Step 1: Store dimensions ──────────────────────────────────────────────────
 function DimensionsStep({
   widthM,
@@ -486,7 +524,7 @@ export default function Wizard({ onComplete, initial }: { onComplete: (a: Answer
   const isLast = step === STEP_COUNT;
 
   return (
-    <div>
+    <div className="wizard-card">
       <StepBar step={step} />
       <div style={{ height: 1, background: "#E8EEF1" }} />
 
@@ -509,20 +547,26 @@ export default function Wizard({ onComplete, initial }: { onComplete: (a: Answer
           />
         )}
         {step === 3 && (
-          <ChecklistStep
-            title="หมวดที่ 1 — สถานที่และสภาพแวดล้อม"
-            rules={RULES_CAT1}
-            checklist={checklist}
-            set={setCheck}
-          />
+          <div className="wizard-grid">
+            <InfoRecap widthM={widthM} depthM={depthM} doorSide={doorSide} />
+            <ChecklistStep
+              title="หมวดที่ 1 — สถานที่และสภาพแวดล้อม"
+              rules={RULES_CAT1}
+              checklist={checklist}
+              set={setCheck}
+            />
+          </div>
         )}
         {step === 4 && (
-          <ChecklistStep
-            title="หมวดที่ 2 — อุปกรณ์และการจัดการยา"
-            rules={RULES_CAT2}
-            checklist={checklist}
-            set={setCheck}
-          />
+          <div className="wizard-grid">
+            <InfoRecap widthM={widthM} depthM={depthM} doorSide={doorSide} />
+            <ChecklistStep
+              title="หมวดที่ 2 — อุปกรณ์และการจัดการยา"
+              rules={RULES_CAT2}
+              checklist={checklist}
+              set={setCheck}
+            />
+          </div>
         )}
       </div>
 

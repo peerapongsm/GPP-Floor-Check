@@ -68,9 +68,9 @@ export default function ReferenceLayout() {
               }}
             />
             <div>
-              <span style={{ fontWeight: 600, color: "var(--ink)" }}>{z.label}</span>
+              <span style={{ fontWeight: 600, color: "var(--ink)", textWrap: "pretty" }}>{z.label}</span>
               <br />
-              <span style={{ color: "#6B7C84" }}>{z.rule}</span>
+              <span style={{ color: "#6B7C84", textWrap: "pretty" }}>{z.rule}</span>
             </div>
           </div>
         ))}

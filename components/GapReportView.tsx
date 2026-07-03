@@ -72,7 +72,7 @@ function ItemRow({ item }: { item: GapItem }) {
         {ICON[item.status]}
       </span>
       <div style={{ flex: 1, minWidth: 0 }}>
-        <div style={{ fontSize: 13, lineHeight: 1.55, color: "var(--ink)" }}>{item.label}</div>
+        <div style={{ fontSize: 13, lineHeight: 1.55, color: "var(--ink)", textWrap: "pretty" }}>{item.label}</div>
         {item.status !== "pass" && (
           <div
             style={{
@@ -80,6 +80,7 @@ function ItemRow({ item }: { item: GapItem }) {
               color: "#6B7C84",
               marginTop: 3,
               lineHeight: 1.4,
+              textWrap: "pretty",
             }}
           >
             → {item.fix}
